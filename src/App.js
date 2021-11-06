@@ -11,10 +11,11 @@ const App = () => {
     return (
         <div className={'wrapper'}>
             <Header/>
-            <BlogPage posts={posts}/>
+            <main>
+                <BlogPage posts={posts}/>
+            </main>
 
-
-            <Footer/>
+            <Footer year={new Date().getFullYear()}/>
         </div>
     );
 };

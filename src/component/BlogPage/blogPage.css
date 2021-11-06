@@ -7,22 +7,6 @@ h1 {
     text-align: center;
 }
 
-.count {
-    text-align: center;
-}
-
-.count button {
-    padding: 4px 20px;
-    font-size: 16px;
-    background-color: #393939;
-    color: white;
-    border-radius: 9999px;
-    cursor: pointer;
-    transition-property: background-color, color;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
-}
-
-.count button:hover {
-    background-color: #656161;
+.post {
+    margin-bottom: 15px;
 }

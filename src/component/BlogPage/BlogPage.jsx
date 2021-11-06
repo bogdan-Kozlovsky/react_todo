@@ -1,30 +1,68 @@
 import React from 'react';
 import './blogPage.css';
+import BlogCard from "./BlogCard";
 
-const BlogPage = ({posts}) => {
+// const BlogPage = ({posts}) => {
+//
+//     return (
+//         <main>
+//             <h1>Simple Blog</h1>
+//             <div className="posts">
+//                 {posts.map(item =>
+//                     <BlogCard
+//                         key={item.id}
+//                         title={item.title}
+//                         description={item.description}
+//                     />)}
+//             </div>
+//
+//         </main>
+//     );
+// };
 
+class BlogPage extends React.Component {
 
-    return (
-        <main>
-            <h1>Simple Blog</h1>
-            <div className="posts">
-                {posts.map((item) => {
-                    return (
-                        <div className="post" key={item.id}>
-                            <h2>{item.title}</h2>
-                            <p>
-                                {item.description}
-                            </p>
+    state = {
+        showBlog: true
+    }
+
+    toggleBlog = () => {
+        this.setState(({showBlog}) => {
+            console.log(showBlog)
+            return {
+                showBlog: !showBlog
+            }
+        })
+    }
+
+    render() {
+        console.log('render');
+        return (
+            <div>
+
+                <button onClick={this.toggleBlog}>
+                    {this.state.showBlog ?
+                        'Скрыть блок' :
+                        'Показать блок'
+                    }
+                </button>
+                <h1>Simple Blog</h1>
+                {
+                    this.state.showBlog ?
+                        <div className="posts">
+                            {this.props.posts.map(item =>
+                                <BlogCard
+                                    key={item.id}
+                                    title={item.title}
+                                    description={item.description}
+                                />)}
                         </div>
-                    )
-                })}
+                        : null
+                }
             </div>
+        )
+    }
+}
 
-            <div onClick={() => alert('Hello todo')} className="count">
-                <button>Get amount of posts</button>
-            </div>
-        </main>
-    );
-};
 
 export default BlogPage;
