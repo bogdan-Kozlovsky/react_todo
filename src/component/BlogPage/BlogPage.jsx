@@ -21,7 +21,6 @@ class BlogPage extends React.Component {
         this.setState({
             blogArr: temp
         })
-
         localStorage.setItem('blogPosts', JSON.stringify(temp))
     }
 
@@ -31,6 +30,18 @@ class BlogPage extends React.Component {
                 showBlog: !showBlog
             }
         })
+    }
+
+    // удаления поста
+    deletePost = (index) => {
+        if (window.confirm(`Удалить ${this.state.blogArr[index].title}?`)) {
+            const temp = [...this.state.blogArr];
+            temp.splice(index, 1);
+            this.setState({
+                blogArr: temp
+            })
+            localStorage.setItem('blogPosts', JSON.stringify(temp))
+        }
     }
 
     render() {
@@ -54,6 +65,7 @@ class BlogPage extends React.Component {
                                     description={item.description}
                                     liked={item.liked}
                                     likePost={() => this.likePost(index)}
+                                    deletePost={() => this.deletePost(index)}
                                 />)}
                         </div>
                         : null

@@ -9,9 +9,27 @@ h1 {
 
 .post {
     margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post__descr{
+    width: 850px;
+    margin-bottom: 5px;
 }
 
 .button{
     cursor: pointer;
     background-color: transparent;
+}
+
+.close{
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.close svg{
+    font-size: 30px;
+
 }
