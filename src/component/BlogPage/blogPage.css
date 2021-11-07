@@ -10,3 +10,8 @@ h1 {
 .post {
     margin-bottom: 15px;
 }
+
+.button{
+    cursor: pointer;
+    background-color: transparent;
+}

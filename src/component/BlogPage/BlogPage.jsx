@@ -1,6 +1,7 @@
 import React from 'react';
 import './blogPage.css';
 import BlogCard from "./BlogCard";
+import {posts} from "../../shared/progectDate";
 
 // const BlogPage = ({posts}) => {
 //
@@ -23,12 +24,23 @@ import BlogCard from "./BlogCard";
 class BlogPage extends React.Component {
 
     state = {
-        showBlog: true
+        showBlog: true,
+        blogArr: posts
+    }
+
+    // лайк поста
+    likePost = (index) => {
+        const temp = this.state.blogArr;
+
+        temp[index].liked = !temp[index].liked;
+
+        this.setState({
+            blogArr: temp
+        })
     }
 
     toggleBlog = () => {
         this.setState(({showBlog}) => {
-            console.log(showBlog)
             return {
                 showBlog: !showBlog
             }
@@ -36,7 +48,7 @@ class BlogPage extends React.Component {
     }
 
     render() {
-        console.log('render');
+        console.log('render')
         return (
             <div>
 
@@ -50,11 +62,13 @@ class BlogPage extends React.Component {
                 {
                     this.state.showBlog ?
                         <div className="posts">
-                            {this.props.posts.map(item =>
+                            {this.state.blogArr.map((item, index) =>
                                 <BlogCard
                                     key={item.id}
                                     title={item.title}
                                     description={item.description}
+                                    liked={item.liked}
+                                    likePost={() => this.likePost(index)}
                                 />)}
                         </div>
                         : null
