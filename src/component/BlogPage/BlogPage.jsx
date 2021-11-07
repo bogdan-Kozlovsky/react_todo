@@ -3,30 +3,14 @@ import './blogPage.css';
 import BlogCard from "./BlogCard";
 import {posts} from "../../shared/progectDate";
 
-// const BlogPage = ({posts}) => {
-//
-//     return (
-//         <main>
-//             <h1>Simple Blog</h1>
-//             <div className="posts">
-//                 {posts.map(item =>
-//                     <BlogCard
-//                         key={item.id}
-//                         title={item.title}
-//                         description={item.description}
-//                     />)}
-//             </div>
-//
-//         </main>
-//     );
-// };
 
 class BlogPage extends React.Component {
 
     state = {
         showBlog: true,
-        blogArr: posts
+        blogArr: JSON.parse(localStorage.getItem('blogPosts')) || posts
     }
+
 
     // лайк поста
     likePost = (index) => {
@@ -37,6 +21,8 @@ class BlogPage extends React.Component {
         this.setState({
             blogArr: temp
         })
+
+        localStorage.setItem('blogPosts', JSON.stringify(temp))
     }
 
     toggleBlog = () => {
@@ -51,7 +37,6 @@ class BlogPage extends React.Component {
         console.log('render')
         return (
             <div>
-
                 <button onClick={this.toggleBlog}>
                     {this.state.showBlog ?
                         'Скрыть блок' :

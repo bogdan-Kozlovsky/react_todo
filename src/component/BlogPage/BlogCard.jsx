@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import './blogPage.css';
 
 const BlogCard = ({title, description, liked, likePost}) => {
     const hartFill = liked ? 'red' : 'black';
+
     return (
         <div>
             <div className="post">
@@ -18,6 +19,10 @@ const BlogCard = ({title, description, liked, likePost}) => {
         </div>
     );
 };
+
+
+
+
 
 // class BlogCard extends React.Component {
 //     state = {
