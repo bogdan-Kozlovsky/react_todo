@@ -5,6 +5,11 @@
     top: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1;
+}
+
+.form__post{
+
 }
 
 .form {
@@ -17,6 +22,20 @@
     border: 1px solid orangered;
     padding: 15px;
     border-radius: 20px;
+}
+
+.form__close_btn{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 11;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.form__close_btn svg {
+    color: aliceblue;
 }
 
 .form__title {

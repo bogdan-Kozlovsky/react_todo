@@ -45,6 +45,15 @@ class BlogPage extends React.Component {
         })
     }
 
+    handleFormAddClose = () => {
+        this.setState({
+            showFormPost: false
+        })
+    }
+
+    // создания поста
+
+
     render() {
         console.log('render')
         return (
@@ -52,7 +61,7 @@ class BlogPage extends React.Component {
                 <button onClick={this.handleFormAddShow}>
                     Создать пост
                 </button>
-                {this.state.showFormPost ? <AddFormPost/> : null}
+                {this.state.showFormPost ? <AddFormPost handleFormAddClose={this.handleFormAddClose}/> : null}
                 <h1>Simple Blog</h1>
 
                 <div className="posts">
