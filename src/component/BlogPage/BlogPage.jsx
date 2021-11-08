@@ -2,12 +2,13 @@ import React from 'react';
 import './blogPage.css';
 import BlogCard from "./BlogCard";
 import {posts} from "../../shared/progectDate";
+import AddFormPost from "../AddFormPost/AddFormPost";
 
 
 class BlogPage extends React.Component {
 
     state = {
-        showBlog: true,
+        showFormPost: false,
         blogArr: JSON.parse(localStorage.getItem('blogPosts')) || posts
     }
 
@@ -24,13 +25,6 @@ class BlogPage extends React.Component {
         localStorage.setItem('blogPosts', JSON.stringify(temp))
     }
 
-    toggleBlog = () => {
-        this.setState(({showBlog}) => {
-            return {
-                showBlog: !showBlog
-            }
-        })
-    }
 
     // удаления поста
     deletePost = (index) => {
@@ -44,32 +38,34 @@ class BlogPage extends React.Component {
         }
     }
 
+    // создания поста
+    handleFormAddShow = () => {
+        this.setState({
+            showFormPost: true
+        })
+    }
+
     render() {
         console.log('render')
         return (
             <div>
-                <button onClick={this.toggleBlog}>
-                    {this.state.showBlog ?
-                        'Скрыть блок' :
-                        'Показать блок'
-                    }
+                <button onClick={this.handleFormAddShow}>
+                    Создать пост
                 </button>
+                {this.state.showFormPost ? <AddFormPost/> : null}
                 <h1>Simple Blog</h1>
-                {
-                    this.state.showBlog ?
-                        <div className="posts">
-                            {this.state.blogArr.map((item, index) =>
-                                <BlogCard
-                                    key={item.id}
-                                    title={item.title}
-                                    description={item.description}
-                                    liked={item.liked}
-                                    likePost={() => this.likePost(index)}
-                                    deletePost={() => this.deletePost(index)}
-                                />)}
-                        </div>
-                        : null
-                }
+
+                <div className="posts">
+                    {this.state.blogArr.map((item, index) =>
+                        <BlogCard
+                            key={item.id}
+                            title={item.title}
+                            description={item.description}
+                            liked={item.liked}
+                            likePost={() => this.likePost(index)}
+                            deletePost={() => this.deletePost(index)}
+                        />)}
+                </div>
             </div>
         )
     }
