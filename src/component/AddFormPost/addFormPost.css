@@ -51,6 +51,7 @@
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 10px;
+    color: aliceblue;
 }
 
 .form__textarea{
@@ -62,6 +63,7 @@
     border-radius: 10px;
     border: 1px solid orange;
     margin-bottom: 20px;
+    color: aliceblue;
 }
 
 .form__btn{
