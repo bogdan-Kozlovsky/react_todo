@@ -3,7 +3,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import './addFormPost.css'
 
 class AddFormPost extends React.Component {
-
     state = {
         postTitle: '',
         postDescr: ''
@@ -11,20 +10,43 @@ class AddFormPost extends React.Component {
 
     menagePostTitleChange = (e) => {
         this.setState({
-            postTitle: e.target.event
+            postTitle: e.target.value
         })
     }
 
     menagePostDescrChange = (e) => {
         this.setState({
-            postDescr: e.target.event
+            postDescr: e.target.value
         })
     }
 
+    // создать пост
+    createPost = () => {
+        const post = {
+            id: this.props.blogArr.length + 1,
+            title: this.state.postTitle,
+            description: this.state.postDescr,
+            liked: false
+        }
+        this.props.addNewPostBlog(post);
+    }
+
+    // componentDidMount() {
+    //     console.log('компонент создался')
+    // }
+    //
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     console.log('Компонент обновился')
+    // }
+    //
+    // componentWillUnmount() {
+    //     console.log('компонент удалился')
+    // }
+
 
     render() {
+        console.log('render addForm')
         const handleFormAddClose = this.props.handleFormAddClose;
-        console.log(this.state)
         return (
             <div className="form__post">
 
@@ -46,7 +68,7 @@ class AddFormPost extends React.Component {
                         onChange={this.menagePostDescrChange}
                         className="form__textarea"
                         placeholder={'Описание поста'}/>
-                    <button onClick={handleFormAddClose} className="form__btn" type='button'>
+                    <button onClick={this.createPost} className="form__btn" type='button'>
                         Создать пост
                     </button>
                 </form>

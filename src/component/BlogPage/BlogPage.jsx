@@ -51,7 +51,37 @@ class BlogPage extends React.Component {
         })
     }
 
+    addNewPostBlog = (post) => {
+        this.setState((state) => {
+            const posts = [...state.blogArr];
+            posts.push(post);
+            localStorage.setItem('blogPosts', JSON.stringify(posts));
+            return {
+                blogArr: posts
+            }
+        })
+        this.handleFormAddClose();
+    }
     // создания поста
+
+
+    // компонент создался
+
+    handleEscape = (e) => {
+        if (e.key === 'Escape' && this.state.showFormPost) {
+            this.handleFormAddClose();
+            console.log('Escape')
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener('keyup', this.handleEscape);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keyup', this.handleEscape)
+        console.log('удалился handleEscape')
+    }
 
 
     render() {
@@ -61,7 +91,10 @@ class BlogPage extends React.Component {
                 <button onClick={this.handleFormAddShow}>
                     Создать пост
                 </button>
-                {this.state.showFormPost ? <AddFormPost handleFormAddClose={this.handleFormAddClose}/> : null}
+                {this.state.showFormPost ? <AddFormPost
+                    addNewPostBlog={this.addNewPostBlog}
+                    blogArr={this.state.blogArr}
+                    handleFormAddClose={this.handleFormAddClose}/> : null}
                 <h1>Simple Blog</h1>
 
                 <div className="posts">
