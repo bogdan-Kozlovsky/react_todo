@@ -21,7 +21,8 @@ class AddFormPost extends React.Component {
     }
 
     // создать пост
-    createPost = () => {
+    createPost = (e) => {
+        e.preventDefault();
         const post = {
             id: this.props.blogArr.length + 1,
             title: this.state.postTitle,
@@ -30,6 +31,8 @@ class AddFormPost extends React.Component {
         }
         this.props.addNewPostBlog(post);
     }
+
+
 
     // componentDidMount() {
     //     console.log('компонент создался')
@@ -50,7 +53,7 @@ class AddFormPost extends React.Component {
         return (
             <div className="form__post">
 
-                <form className="form">
+                <form className="form" onSubmit={this.createPost}>
                     <button className="form__close_btn">
                         <CloseIcon onClick={handleFormAddClose}/>
                     </button>
@@ -62,13 +65,17 @@ class AddFormPost extends React.Component {
                         onChange={this.menagePostTitleChange}
                         className="form__input"
                         type="text"
-                        placeholder={'Заголовок поста'}/>
+                        placeholder={'Заголовок поста'}
+                        required
+                    />
                     <textarea
                         value={this.state.postDescr}
                         onChange={this.menagePostDescrChange}
                         className="form__textarea"
-                        placeholder={'Описание поста'}/>
-                    <button onClick={this.createPost} className="form__btn" type='button'>
+                        placeholder={'Описание поста'}
+                        required
+                    />
+                    <button className="form__btn">
                         Создать пост
                     </button>
                 </form>

@@ -31,5 +31,11 @@ h1 {
 
 .close svg{
     font-size: 30px;
+}
 
+.db-title{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

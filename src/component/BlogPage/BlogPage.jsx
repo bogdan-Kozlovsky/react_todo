@@ -3,13 +3,14 @@ import './blogPage.css';
 import BlogCard from "./BlogCard";
 import {posts} from "../../shared/progectDate";
 import AddFormPost from "../AddFormPost/AddFormPost";
+import axios from "axios";
 
 
 class BlogPage extends React.Component {
 
     state = {
         showFormPost: false,
-        blogArr: JSON.parse(localStorage.getItem('blogPosts')) || posts
+        blogArr: []
     }
 
 
@@ -66,7 +67,6 @@ class BlogPage extends React.Component {
 
 
     // компонент создался
-
     handleEscape = (e) => {
         if (e.key === 'Escape' && this.state.showFormPost) {
             this.handleFormAddClose();
@@ -75,6 +75,15 @@ class BlogPage extends React.Component {
     }
 
     componentDidMount() {
+        axios.get('https://5fb3db44b6601200168f7fba.mockapi.io/api/posts/')
+            .then((responce) => {
+                this.setState({
+                    blogArr: responce.data
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
         window.addEventListener('keyup', this.handleEscape);
     }
 
@@ -86,7 +95,13 @@ class BlogPage extends React.Component {
 
     render() {
         console.log('render')
+
+        //проверка на загрузку данных
+        if (this.state.blogArr.length === 0) {
+            return <h1 className="db-title">Ждем данные...</h1>
+        }
         return (
+
             <div>
                 <button onClick={this.handleFormAddShow}>
                     Создать пост
